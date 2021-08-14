@@ -6,7 +6,7 @@ from .models import Article, Project, Picture, Cv, About
 from .forms import CommentForm
 
 def index(request):
-    projects = Project.objects.order_by('-timestamp')[:10]
+    projects = Project.objects.order_by('-timestamp')[:4]
     cv = Cv.objects.all()
     picture = Picture.objects.all()
     about = About.objects.all()
