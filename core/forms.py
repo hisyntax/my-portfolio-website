@@ -23,15 +23,15 @@ class PostForm(forms.ModelForm):
 
 class CommentForm(forms.ModelForm):
     body = forms.CharField(widget=forms.Textarea(attrs={
-        'placeholder': 'Type in your comment...', 'style': 'width: 70%; border:2px solid #5000ca; border-radius: 5px; padding:5px; outline: none; display: block; margin-bottom: 5px'
+        'placeholder': 'E.g This is my comment...', 'style': 'width: 100%; max-width: 70%; border:2px solid #5000ca; border-radius: 5px; padding:5px; outline: none; display: block; margin-bottom: 5px'
     }))
 
     email = forms.CharField(widget=forms.TextInput(attrs={
-        'placeholder': 'Type in your smail...', 'style': 'width: 70%; border:2px solid #5000ca; border-radius: 5px; padding:5px; outline: none; display: block; margin-bottom: 5px'
+        'placeholder': 'E.g JohnDoe@gmail.com...', 'style': 'width: 100%; max-width: 70%; border:2px solid #5000ca; border-radius: 5px; padding:5px; outline: none; display: block; margin-bottom: 5px'
     }))
     
     name = forms.CharField(widget=forms.TextInput(attrs={
-        'placeholder': 'Type in your name...', 'style': 'width: 70%; border:2px solid #5000ca; border-radius: 5px; padding:5px; outline: none; display: block; margin-bottom: 5px'
+        'placeholder': 'John Doe...', 'style': 'width: 100%; max-width: 70%; border:2px solid #5000ca; border-radius: 5px; padding:5px; outline: none; display: block; margin-bottom: 5px'
     }))
     class Meta:
         model = Comment
