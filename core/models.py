@@ -59,7 +59,7 @@ class Project(models.Model):
     golang = models.BooleanField(default=False, blank=True)
     featured = models.BooleanField(default=False, blank=True)
     url = models.CharField(max_length=500)
-    template = models.BooleanField(default=False)
+    template = models.BooleanField(default=False, blank=True)
 
     def __str__(self):
         return self.overview
