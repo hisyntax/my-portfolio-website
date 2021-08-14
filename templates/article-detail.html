@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<style>
+    pre, code, kbd, samp {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        font-size: 13px;
+        overflow-x: scroll;
+    }
+    img, svg, video, canvas, audio, iframe, embed, object {
+        display: block;
+        width: fit-content;
+    }
+    em a{
+        font-size: 12px;
+    }
+    @media screen and (max-width:700px) {
+        img, svg, video, canvas, audio, iframe, embed, object {
+            display: block;
+            width: 100%;
+            
+        }
+    }
+</style>
+<div class="px-3">
+    <div class="">
+        <div>
+            <h1 class="text-lg md:text-xl md:mt-5 text-center">{{ article.title }}</h1>
+        </div>
+        <div class="mt-2">
+            <img class="mx-auto rounded-md md:w-1/2 md:h-3/6  w-full h-auto" src="{{ article.thumbnail.url }}" alt="">
+        </div>
+        <div class="flex justify-evenly items-center mb-3">
+            <div class="flex justify-evenly items-center mt-2">
+                <span class="flex items-center text-xs md:text-sm">
+                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    {{ article.timestamp|timesince }} ago
+                </span>
+            </div>
+            <div class="text-xs md:text-sm">
+                <span>Posted by: Jiya Mathias</span>
+            </div>
+        </div>
+        <div id="div">
+            <p class="text-center">
+                {{ article.overview | safe }}
+            </p>
+        </div>
+        <div class="mt-10">
+            {% if new_comment %}
+            <div class="">
+                <div>
+                    <h1 class="text-green-500"> Your comment is awaiting moderation</h1>
+                </div>
+
+                <div class="mt-3">
+                    <h1 class="md:text-xl text-lg mb-3">Leave a comment</h1>
+                    {{ comment_form | crispy }}
+                    {% csrf_token %}
+                    <button type="submit" class="bg-purple-900 px-2 py-1 rounded-md text-white mt-2">Comment</button>
+                </div>
+            </div>
+            {% else %}
+            <form action="" method="post">
+                <div>
+                    <h1 class="md:text-xl text-lg mb-3">Leave a comment</h1>
+                    {{ comment_form }}
+                    {% csrf_token %}
+                    <button type="submit" class="bg-purple-900 px-2 py-1 rounded-md text-white mt-2">Comment</button>
+                <!-- <div>
+                        <div>
+                            <p class="mb-2">Name</p>
+                            <input class="border-2 border-purple-900 rounded-md text-purple-700 px-2 py-1 md:w-6/12 w-full outline-none" type="text" name="" placeholder="Type in your name..." id="">
+                        </div>
+                        <div>
+                            <p class="mt-4 mb-2">Comment</p>
+                            <textarea  class="border-2 border-purple-900 rounded-md text-purple-700 px-2 py-1 md:w-6/12 w-full outline-none comment-form" name="" id="" placeholder="Type in your comment..." cols="30" rows="10"></textarea>
+                        </div>
+                        <button class="bg-purple-900 px-2 py-1 rounded-md text-white mt-2">Comment</button>
+                    </div> -->
+                </div>
+            </form>
+            {% endif %}
+        </div>
+        <div class="mt-10">
+            <h1 class="md:text-xl text-lg mb-3">Comments list</h1>
+            <div class="my-1"><b>{{ comments.count }}</b> comments</div>
+            <div class="mt-3">
+                {% for comment in comments %}
+                <div class="bg-gray-200 rounded-md py-1 md:w-6/12 w-full mb-1">
+                    <div class="flex justify-between items-center my-1 mx-3">
+                        <h1>{{ comment.name }}</h1>
+                        <span>{{ comment.created_on }}</span>
+                    </div>
+                    <div class="border-b-2 border-gray-300"></div>
+                    <p class="ml-3 my-2">{{ comment.body }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

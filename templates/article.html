@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="px-3">
+    <div>
+        <h1 class="text-2xl md:text-3xl md:mt-5">Articles</h1>
+    </div>
+    <div class="grid md:grid-cols-2 gap-4">
+        {% for i in queryset %}
+        <div class="flex mt-3 items-center rounded-md bg-gray-100 " >
+            <div id="img" class="w-1/6 overflow-hidden rounded-md">
+                <img class="h-auto" src="{{ i.thumbnail.url }}" alt="">
+            </div>
+            <div class="ml-2 mr-2">
+                <h1 class="mb-1 text-sm md:text-lg">{{ i.title }}</h1>
+                <div>
+                    <span>
+                        <a href="{{ i.get_absolute_url }}" class="pt-1 pb-1 pr-5 pl-5 rounded bg-black text-white text-xs md:text-sm">
+                            View
+                        </a>
+                    </span>
+                </div>
+                <div>
+                    <div class="flex justify-evenly items-center mt-2">
+                        <span class="flex items-center text-xs md:text-sm">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            {{ i.timestamp|timesince }} ago
+                        </span>
+                    </div>
+                    <div class="flex justify-end gap-1 items-center mt-3 text-xs">
+                        {% if i.golang %}
+                        <span class="pt-1 pb-1 pr-2 pl-2 text-black rounded-full yellow">Golang</span>
+                        {% endif %}
+                        {% if i.sqlite %}
+                        <span class="pt-1 pb-1 pr-2 pl-2 text-black rounded-full green">Sqlite3</span>
+                        {% endif %}
+                        {% if i.django %}
+                        <span class="pt-1 pb-1 pr-2 pl-2 text-black rounded-full blue">Django</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="flex justify-around gap-4 my-20 items-center text-xs md:text-sm">
+        {% if queryset.has_previous %}
+        <div class="bg-black text-white rounded-md w-14 py-1 text-center">
+            <a href="?{{ page_request_var }}={{ queryset.previous_page_number }}">
+                Prev
+            </a>
+        </div>
+        {% endif %}
+        <div class="bg-black text-white text-center rounded-full h-8 w-8 md:pt-2 pt-2">{{ queryset.number }}</div>
+        {% if queryset.has_next %}
+        <div class="bg-black text-white rounded-md w-14 py-1 text-center">
+            <a href="?{{ page_request_var }}={{ queryset.next_page_number }}">
+                Next
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}

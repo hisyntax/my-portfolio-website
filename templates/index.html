@@ -1,0 +1,224 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="p-3">
+        <div>
+            <h1 class=" text-4xl md:text-6xl text-center">Hi there<span class="text-lg">,</span></h1>
+            {% for i in about %}
+            <p class="text-sm md:text-lg mt-2 text-center">{{ i.overview }}</p>
+            {% endfor %}
+        </div>
+        <div>
+            <div class="mt-3">
+                <ul class="flex justify-around">
+                    <li class="w-32 p-1 rounded-md text-center text-sm md:text-lg text-white" id="cv">
+                        {% for i in cv %}
+                        <a href="." download="{{ i.cv }}" class="flex gap-2 justify-center items-center">
+                            Get CV
+                            <svg class="md:w-6 md:h-6 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path></svg>
+                        </a>
+                        {% endfor %}
+                    </li>
+                    <li class="w-32 p-1 rounded-md text-center text-sm md:text-lg text-white" id="cv">
+                        <a href="mailto:mathiasjiya2@gmail.com" class="flex gap-2 justify-center items-center">
+                            Hire me
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path></svg>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="mt-10">
+            <div>
+                <h1 class="text-2xl md:text-3xl">Templates</h1>
+            </div>
+            <div class="mt-3">
+                <div class="flex overflow-x-scroll gap-2 text-lg">
+                    {% for i in project %}
+                    {% if i.template %}
+                    <div id="img" class="bg-gray-200 w-1/6 overflow-hidden rounded-md">
+                        <img class="text-lg  h-auto" src="{{ i.thumbnail.url }}" alt="">
+                        <div class="text-center mb-1">
+                            <span>
+                                <a href="{{ i.url }}" class="pt-1 pb-1 pr-5 pl-5 rounded bg-black text-white text-xs md:text-sm">
+                                    Visit
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div>
+            <div>
+                <h1 class="text-2xl md:text-3xl mt-10">API's</h1>
+            </div>
+            <div class="grid md:grid-cols-2 gap-4">
+                {% for i in project %}
+                <div class="flex mt-3 items-center rounded-md bg-gray-100 " >
+                    <div id="img" class="w-1/6 overflow-hidden rounded-md">
+                        <img class="h-auto" src="{{ i.thumbnail.url }}" alt="">
+                    </div>
+                    <div class="ml-2 mr-2">
+                        <h1 class="mb-1 text-sm md:text-lg">{{ i.overview|truncatechars:100 }}</h1>
+                        <div>
+                            <span>
+                                <a href="{{ i.url }}" class="pt-1 pb-1 pr-5 pl-5 rounded bg-black text-white text-xs md:text-sm">
+                                    View
+                                </a>
+                            </span>
+                        </div>
+                        <div>
+                            <div class="flex justify-evenly items-center mt-2">
+                                <span class="flex items-center text-xs md:text-sm">
+                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    {{ i.timestamp|timesince }} ago
+                                </span>
+                            </div>
+                            <div class="flex justify-end gap-1 items-center mt-3 text-xs">
+                                {% if i.golang %}
+                                <span class="pt-1 pb-1 pr-2 pl-2 text-black rounded-full yellow">Golang</span>
+                                {% endif %}
+                                {% if i.sqlite %}
+                                <span class="pt-1 pb-1 pr-2 pl-2 text-black rounded-full green">Sqlite3</span>
+                                {% endif %}
+                                {% if i.django %}
+                                <span class="pt-1 pb-1 pr-2 pl-2 text-black rounded-full blue">Django</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div>
+            <div>
+                <h1 class="text-2xl md:text-3xl mt-10">Major Projects</h1>
+            </div>
+            <div class="grid md:grid-cols-2 gap-4">
+                {% for i in project %}
+                {% if i.featured %}
+                <div class="flex mt-3 items-center rounded-md bg-gray-100 " >
+                    <div id="img" class="w-1/6 overflow-hidden rounded-md">
+                        <img class="h-auto" src="{{ i.thumbnail.url }}" alt="">
+                    </div>
+                    <div class="ml-2 mr-2">
+                        <h1 class="mb-1 text-sm md:text-lg">{{ i.overview|truncatechars:100}}</h1>
+                        <div>
+                            <span>
+                                <a href="{{ i.url }}" class="pt-1 pb-1 pr-5 pl-5 rounded bg-black text-white text-xs md:text-sm">
+                                    View
+                                </a>
+                            </span>
+                        </div>
+                        <div>
+                            <div class="flex justify-evenly items-center mt-2">
+                                <span class="flex items-center text-xs md:text-sm">
+                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    {{ i.timestamp|timesince }} ago
+                                </span>
+                            </div>
+                            <div class="flex justify-end gap-1 items-center mt-3 text-xs">
+                                {% if i.golang %}
+                                <span class="pt-1 pb-1 pr-2 pl-2 text-black rounded-full yellow">Golang</span>
+                                {% endif %}
+                                {% if i.sqlite %}
+                                <span class="pt-1 pb-1 pr-2 pl-2 text-black rounded-full green">Sqlite3</span>
+                                {% endif %}
+                                {% if i.django %}
+                                <span class="pt-1 pb-1 pr-2 pl-2 text-black rounded-full blue">Django</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="md:mt-16 mt-10">
+            <div  class="md:flex justify-center gap-5 items-center">
+                {% for i in picture %}
+                <div>
+                    <img class="rounded-full md:w-3/4 w-1/2 mx-auto" src="{{ i.picture.url }}" alt="">
+                </div>
+                {% endfor %}
+                <div class="md:flex flex-col mt-3">
+                    <div>
+                        <div>
+                            <h1 class="text-sm md:text-2xl text-center underline">I am available for:</h1>
+                        </div>
+                        <div>
+                            <ul class="mb-1">
+                                <li class="flex gap-1 text-xs md:text-lg justify-center items-center">
+                                    <!-- <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> -->
+                                    <svg id="cv2" class="w-6 h-6 rounded-full" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    Collaborationg on any Django or Golang projects.
+                                </li>
+                            </ul>
+                            <ul class="mb-1">
+                                <li class="flex gap-1 text-xs md:text-lg justify-center items-center">
+                                    <!-- <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> -->
+                                    <svg id="cv2" class="w-6 h-6 rounded-full" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    Web development with HTML5, CSS3, TialwindCSS, JQuery and JavaScript.
+                                </li>
+                            </ul>
+                            <ul class="mb-1">
+                                <li class="flex gap-1 text-xs md:text-lg justify-center items-center">
+                                    <!-- <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> -->
+                                    <svg id="cv2" class="w-6 h-6 rounded-full" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    Backend Development with either Python/Django or Golang.
+                                </li>
+                            </ul>
+
+                        </div>
+                        <div>
+                            <div>
+                                <h1 class="text-sm md:text-2xl text-center underline">Get in touch:</h1>
+                            </div>
+                            <div>
+                                <ul class="mb-1">
+                                    <li class="flex gap-1 text-xs md:text-lg justify-center items-center">
+                                        <!-- <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> -->
+                                        <svg id="cv2" class="w-6 h-6 rounded-full" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                        I am currently taking on freelancing jobs.
+                                    </li>
+                                </ul>
+                                <ul class="mb-1">
+                                    <li class="flex gap-1 text-xs md:text-lg justify-center items-center">
+                                        <!-- <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> -->
+                                        <svg id="cv2" class="w-6 h-6 rounded-full" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                        I am opened for full-time or part-time jobs.
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <div class="mt-3">
+                                    <ul class="flex justify-evenly">
+                                        <li class="w-32 p-1 rounded-md text-center text-sm md:text-lg text-white" id="cv">
+                                            <a href="tel:+2349132600841" target="_blank" class="flex gap-2 justify-center items-center">
+                                                Call
+                                                <svg class=" h-4 w-4 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 3l-6 6m0 0V4m0 5h5M5 3a2 2 0 00-2 2v1c0 8.284 6.716 15 15 15h1a2 2 0 002-2v-3.28a1 1 0 00-.684-.948l-4.493-1.498a1 1 0 00-1.21.502l-1.13 2.257a11.042 11.042 0 01-5.516-5.517l2.257-1.128a1 1 0 00.502-1.21L9.228 3.683A1 1 0 008.279 3H5z"></path></svg>
+                                            </a>
+                                        </li>
+                                        <li class="w-32 p-1 rounded-md text-center text-sm md:text-lg text-white" id="cv">
+                                            <a href="mailto:mathiasjiya2@gmail.com" target="_blank" class="flex gap-2 justify-center items-center">
+                                                Email
+                                                <svg class=" h-4 w-4 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </div>
+    {% include 'menu.html' %}   
+
+{% endblock content %}
