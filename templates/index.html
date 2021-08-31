@@ -57,12 +57,13 @@
             </div>
             <div class="grid md:grid-cols-2 gap-4">
                 {% for i in project %}
+                {% if i.api %}
                 <div class="flex mt-3 items-center rounded-md bg-gray-100 " >
                     <div id="img" class="w-1/6 overflow-hidden rounded-md">
                         <img class="h-auto" src="{{ i.thumbnail.url }}" alt="">
                     </div>
                     <div class="ml-2 mr-2">
-                        <h1 class="mb-1 text-sm md:text-lg">{{ i.overview|truncatechars:100 }}</h1>
+                        <h1 class="mb-1 text-sm md:text-lg">{{ i.overview|truncatechars:100|safe }}</h1>
                         <div>
                             <span>
                                 <a href="{{ i.url }}" class="pt-1 pb-1 pr-5 pl-5 rounded bg-black text-white text-xs md:text-sm">
@@ -91,12 +92,15 @@
                         </div>
                     </div>
                 </div>
+                {%  else %}
+                <h1 class="mb-1 text-sm md:text-lg">There are no API's built yet.</h1>
+                {% endif %}
                 {% endfor %}
             </div>
         </div>
         <div>
             <div>
-                <h1 class="text-2xl md:text-3xl mt-10">Other Projects</h1>
+                <h1 class="text-2xl md:text-3xl mt-10">Outlined Projects</h1>
             </div>
             <div class="grid md:grid-cols-2 gap-4">
                 {% for i in project %}
@@ -106,7 +110,7 @@
                         <img class="h-auto" src="{{ i.thumbnail.url }}" alt="">
                     </div>
                     <div class="ml-2 mr-2">
-                        <h1 class="mb-1 text-sm md:text-lg">{{ i.overview|truncatechars:100}}</h1>
+                        <h1 class="mb-1 text-sm md:text-lg">{{ i.overview|truncatechars:100|safe}}</h1>
                         <div>
                             <span>
                                 <a href="{{ i.url }}" class="pt-1 pb-1 pr-5 pl-5 rounded bg-black text-white text-xs md:text-sm">
@@ -135,6 +139,8 @@
                         </div>
                     </div>
                 </div>
+                {%  else %}
+                <h1 class="mb-1 text-sm md:text-lg">There are no other projects available yet.</h1>
                 {% endif %}
                 {% endfor %}
             </div>

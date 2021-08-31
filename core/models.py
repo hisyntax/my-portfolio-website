@@ -58,8 +58,9 @@ class Project(models.Model):
     sqlite = models.BooleanField(default=False, blank=True)
     golang = models.BooleanField(default=False, blank=True)
     featured = models.BooleanField(default=False, blank=True)
-    url = models.CharField(max_length=500)
     template = models.BooleanField(default=False, blank=True)
+    api = models.BooleanField(default=False, blank=True)
+    url = models.CharField(max_length=500)
 
     def __str__(self):
         return self.overview

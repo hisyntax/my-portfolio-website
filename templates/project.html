@@ -12,7 +12,7 @@
                 <img class="h-auto" src="{{ i.thumbnail.url }}" alt="">
             </div>
             <div class="ml-2 mr-2">
-                <h1 class="mb-1 text-sm md:text-lg">{{ i.overview| truncatechars:50 }}</h1>
+                <h1 class="mb-1 text-sm md:text-lg">{{ i.overview| truncatechars:50|safe }}</h1>
                 <div>
                     <span>
                         <a href="{{ i.url }}" class="pt-1 pb-1 pr-5 pl-5 rounded bg-black text-white text-xs md:text-sm">
@@ -36,6 +36,9 @@
                         {% endif %}
                         {% if i.django %}
                         <span class="pt-1 pb-1 pr-2 pl-2 text-black rounded-full blue">Django</span>
+                        {% endif %}
+                        {% if i.api %}
+                        <span class="pt-1 pb-1 pr-4 pl-4 text-black rounded-full bg-purple-400">API</span>
                         {% endif %}
                     </div>
                 </div>
