@@ -40,7 +40,7 @@
                         <img class="text-lg  h-auto" src="{{ i.thumbnail.url }}" alt="">
                         <div class="text-center mb-1">
                             <span>
-                                <a href="{{ i.url }}" class="pt-1 pb-1 pr-5 pl-5 rounded bg-black text-white text-xs md:text-sm">
+                                <a href="{{ i.url }}" target="_blank" class="pt-1 pb-1 pr-5 pl-5 rounded bg-black text-white text-xs md:text-sm">
                                     Visit
                                 </a>
                             </span>
@@ -66,7 +66,7 @@
                         <h1 class="mb-1 text-sm md:text-lg">{{ i.overview|truncatechars:100|safe }}</h1>
                         <div>
                             <span>
-                                <a href="{{ i.url }}" class="pt-1 pb-1 pr-5 pl-5 rounded bg-black text-white text-xs md:text-sm">
+                                <a href="{{ i.url }}" target="_blank" class="pt-1 pb-1 pr-5 pl-5 rounded bg-black text-white text-xs md:text-sm">
                                     View
                                 </a>
                             </span>
@@ -113,7 +113,7 @@
                         <h1 class="mb-1 text-sm md:text-lg">{{ i.overview|truncatechars:100|safe}}</h1>
                         <div>
                             <span>
-                                <a href="{{ i.url }}" class="pt-1 pb-1 pr-5 pl-5 rounded bg-black text-white text-xs md:text-sm">
+                                <a href="{{ i.url }}" target="_blank" class="pt-1 pb-1 pr-5 pl-5 rounded bg-black text-white text-xs md:text-sm">
                                     View
                                 </a>
                             </span>
@@ -140,7 +140,7 @@
                     </div>
                 </div>
                 {%  else %}
-                <h1 class="mb-1 text-sm md:text-lg">There are no other projects available yet.</h1>
+                <h1 class="mb-1 text-sm md:text-lg">There are no outlined projects available yet.</h1>
                 {% endif %}
                 {% endfor %}
             </div>
